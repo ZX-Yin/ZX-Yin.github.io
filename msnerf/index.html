@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>MS-NeRF</title>
+		<!-- Bootstrap core CSS -->
+		
+		<!-- Custom styles for this template -->
+		<link href="css/academicons.css" rel="stylesheet">
+		<link rel="stylesheet" href="/dics.original.css">
+		<script src="/dics.original.js"></script>
+		<link href="css/footer.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="src/original/dics.original.css">
+		<link rel='stylesheet'
+         href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    	<script src="src/original/dics.original.js"></script>
+		<link
+		  rel="stylesheet" 
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+		  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+		  crossorigin="anonymous">
+		<!-- Custom fonts for this template -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', domReady);
+	
+			function domReady() {
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[0],
+					textPosition: 'top'
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[1],
+					hideTexts: true,
+					textPosition: 'center'
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[2]
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[3],
+					linesOrientation: 'vertical',
+					textPosition: 'left',
+					arrayBackgroundColorText: ['#000000', '#FFFFFF'],
+					arrayColorText: ['#FFFFFF', '#000000'],
+					linesColor: 'rgb(0,0,0)'
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[4],
+					linesOrientation: 'vertical',
+					textPosition: 'right'
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[5],
+					textPosition: 'bottom'
+				});
+	
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[6],
+					filters: ['blur(3px)', 'grayscale(1)', 'sepia(1)', 'saturate(3)']
+				});
+				new Dics({
+					container: document.querySelectorAll('.b-dics')[7],
+					rotate: '45deg'
+				});
+	
+			}
+		</script>
+		<script type="text/javascript">
+			var x = 0;
+			var images = [
+				["my_imgs/v10_3m_360.png"
+			, "my_imgs/v10_3m_m360.png",
+			"my_imgs/v10_3m_mip.png",
+			"my_imgs/v10_3m_mmip.png",],
+			
+			];
+			function ChangeImage() {
+				x = Math.floor(Math.random() * images.length);
+              	document.getElementById("img1").src = images[x];
+			}
+			function displayNextImages() {
+              	x = (x === images.length - 1) ? 0 : x + 1;
+              	document.getElementById("img1").src = images[x][0];
+				document.getElementById("img2").src = images[x][1];
+				document.getElementById("img3").src = images[x][2];
+				document.getElementById("img4").src = images[x][3];
+          }
+
+			function displayPreviousImages() {
+				x = (x <= 0) ? images.length - 1 : x - 1;
+				document.getElementById("img1").src = images[x][0];
+				document.getElementById("img2").src = images[x][1];
+				document.getElementById("img3").src = images[x][2];
+				document.getElementById("img4").src = images[x][3];
+			}
+			function ChangeImages() {
+				x = Math.floor(Math.random() * images.length);
+              	document.getElementById("img1").src = images[x][0];
+				document.getElementById("img2").src = images[x][1];
+				document.getElementById("img3").src = images[x][2];
+				document.getElementById("img4").src = images[x][3];
+			}
+		</script>
+		
+	</head>
+<body>
+
+<main role="main" class="container", style="max-width: 900px;">
+	    <h1 class="title is-3 publication-title">Multi-Space Neural Radiance Fields</h1>
+	<!-- &#x1F6AB &#129306 &#128581 &#128581;&#8205;&#9792;&#65039 &#x1F6AB-->
+	<div class="col text-center">
+	    <p class="authors">
+		  Ze-Xin Yin,
+	      Jia-Xiong Qiu, 
+	      <a href="https://mmcheng.net/">Ming-Ming Cheng</a>,
+		  <a href="http://ren-bo.net">Bo Ren</a><br>
+	      <a href="http://active.vision"> TMCC</a>,
+	      CS, Nankai University
+	    </p>
+	</div>
+	<div class="col text-center", style="padding: 20px 0px;">
+	    <a class="btn btn-dark", href="" role="button">Paper</a>
+		<a class="btn btn-dark" href="#bibtex" role="button">Bibtex</a>
+		<!-- <a class="btn btn-dark" href="https://github.com/ActiveVisionLab/ray-onet/" role="button">Code</a> -->
+		<button type="button" class="btn btn-dark" disabled>Code</button>
+		<a class="btn btn-dark", href="" role="button">Dataset</a>
+	</div>
+	<div class="polaroid" style="padding-bottom: 40px">
+		<div style="padding: 0px 0px;", class="center">
+			<div class="b-dics" >
+				<img id="img3" src="my_imgs/v10_3m_360.png" alt="Mip-NeRF 360">
+				<img id="img2" src="my_imgs/v10_3m_m360.png" alt="MS-Mip-NeRF 360">
+				<img id="img1" src="my_imgs/v10_3m_mip.png" alt="Mip-NeRF">
+				<img id="img4" src="my_imgs/v10_3m_mmip.png" alt="MS-Mip-NeRF">
+			</div>		
+		</div>
+
+		<div style="padding: 0px 0px;">
+		<!-- <button type="button" class="btn btn-outline-dark" onclick="ChangeImages()">Change</button> -->
+		<div class="pos_left" >
+		<button type="button" class="btn btn-outline-dark" onclick="displayPreviousImages()">&#10094 Previous</button>
+		</div>
+		<div class="pos_right">
+		<button type="button" class="btn btn-outline-dark" onclick="displayNextImages()">Next &#10095</button>
+		</div>
+	</div>
+	</div>
+	<h2 class="title is-4">Abstract</h2>
+	  <p>
+	    Neural Radiance Fields (NeRF) and its variants have
+		reached state-of-the-art performance in many novel-view-synthesis-related tasks.
+		However, current NeRF-based
+		methods still suffer from the existence of reflective objects,
+		often resulting in blurry or distorted rendering. Instead
+		of calculating a single radiance field, we propose a multi-space
+		neural radiance field (MS-NeRF) that represents the
+		scene using a group of feature fields in parallel sub-spaces,
+		which leads to a better under-standing of the neural network
+		toward the existence of reflective and refractive objects. 
+		Our multi-space scheme works as an enhancement
+		to existing NeRF methods, with only small computational
+		overheads needed for training and inferring the extra-space
+		outputs. We demonstrate the superiority and compatibility
+		of our approach using three representative NeRF-based
+		models, i.e., NeRF, Mip-NeRF, and Mip-NeRF 360. Comparisons
+		are performed on a novelly constructed dataset
+		consisting of 25 synthetic scenes and 7 real captured scenes
+		with complex reflection and refraction, all having 360-degree
+		viewpoints. Extensive experiments show that our approach
+		significantly outperforms the existing single-space
+		NeRF methods for rendering high-quality scenes concerned
+		with complex light paths through mirror-like objects.
+	  </p>
+	<h2 class="title is-4">Method Pipeline</h2>
+	<div style="padding: 20px 0px;", class="center">
+	<img src="my_imgs/pipeline.png" alt="Model Pipeline", class="center">
+	</div>
+	<!--<h2 class="title is-4",  style="padding: 0px 0px;">Key points</h2>-->
+	<!--<p>
+		We visualise the  <b style="color: #d62728">estimated pose trajectories </b> of each method against <b style="color: #2ca02c">ground truth trajectories</b>. We also visualised the relative rotation errors 
+		(<b><i>RPE<sub>r</sub></i></b>) for each frame in the image sequence as colour bars at the bottom, where the relative scaling of colour is shown on the right (in degrees).
+	 </p>
+	-->
+	<h2 class="title is-4">Novel View Rendering(Mip-NeRF 360 v.s. MS-Mip-NeRF 360)</h2>
+	 <div class="row">
+		<div class="column">
+			<video height="400" width="400" class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-3mirror.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+		</div>
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-mirror_room_v1.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+		</div>
+	</div>
+	<div class="row">
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-multiple_mirrors_v2.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+		</div>
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-multiple_mirrors_v6.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+		</div>
+	</div>
+	<div class="row">
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-multiple_mirrors_v9.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+		</div>
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/360/comp-three_diff_mirrors.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+		</div>
+	</div>
+	<h2 class="title is-4">Novel View Rendering(Mip-NeRF v.s. MS-Mip-NeRF<sub>B</sub>)</h2>
+	<div class="row">
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/mip/comp-multi_mirrors_v10_2mdf.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+		</div>
+		<div class="column">
+			<video class='center_video' controls autoplay muted loop>
+			<source src="my_videos/mip/comp-three_mirrors.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+		</div>
+	</div>
+	<h2 class="title is-4">Sub-space RGB and weights(based on MS-NeRF<sub>B</sub>)</h2>
+	<div>
+		<video class='center_video' controls autoplay muted loop>
+		<source src="my_videos/decomp.mp4" type="video/mp4">
+	</div>
+	
+	<!--
+	<h2 class="title is-4">Full Video</h2>
+	<iframe style='width:100%; height:500px;' src="https://www.youtube.com/embed/GpSuBh5xRrE" title="YouTube video player" 
+	frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+	encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	-->
+<h2 class="title is-4">BibTeX</h2>
+<code class="codebox" id="bibtex"><pre>
+	@inproceedings{yin2023msnerf,
+		author    = {Ze-Xin Yin and Jia-Xiong Qiu and Ming-Ming Cheng and Bo Ren},
+		title     = {Multi-Space Neural Radiance Fields},
+		journal   = {CVPR},
+		year      = {2023}
+	  }
+   
+</pre></code>
+	<h2 class="title is-4">Acknowledgement</h2>
+	  <p, style="padding: 50px 0px;">
+		This work is funded by the Natural Science Foundation of China (NO. 62132012).
+		We borrow the template from <a href="https://nope-nerf.active.vision/">NoPe NeRF</a>, 
+		which is a great work that enchances the ability of NeRF-based methods on scenes with no poses.
+	  </p>
+
+</main>
+</body>
+	
+</html>
