@@ -78,11 +78,18 @@
 		<script type="text/javascript">
 			var x = 0;
 			var images = [
-				["my_imgs/v10_3m_360.png"
-			, "my_imgs/v10_3m_m360.png",
-			"my_imgs/v10_3m_mip.png",
-			"my_imgs/v10_3m_mmip.png",],
-			
+				["my_imgs/3m_mip.png",
+				"my_imgs/3m_mmip.png",
+				"my_imgs/3m_360.png"
+				, "my_imgs/3m_m360.png",],
+				["my_imgs/v10_3m_mip.png",
+				"my_imgs/v10_3m_mmip.png",
+				"my_imgs/v10_3m_360.png"
+				, "my_imgs/v10_3m_m360.png",],
+				["my_imgs/mr6_mip.png",
+				"my_imgs/mr6_mmip.png",
+				"my_imgs/mr6_360.png"
+				, "my_imgs/mr6_m360.png",],
 			];
 			function ChangeImage() {
 				x = Math.floor(Math.random() * images.length);
@@ -120,8 +127,8 @@
 	<!-- &#x1F6AB &#129306 &#128581 &#128581;&#8205;&#9792;&#65039 &#x1F6AB-->
 	<div class="col text-center">
 	    <p class="authors">
-		  Ze-Xin Yin,
-	      Jia-Xiong Qiu, 
+		  <a href="https://ZX-Yin.github.io/">Ze-Xin Yin</a>,
+	      Jiaxiong Qiu, 
 	      <a href="https://mmcheng.net/">Ming-Ming Cheng</a>,
 		  <a href="http://ren-bo.net">Bo Ren</a><br>
 	      <a href="http://active.vision"> TMCC</a>,
@@ -133,15 +140,15 @@
 		<a class="btn btn-dark" href="#bibtex" role="button">Bibtex</a>
 		<!-- <a class="btn btn-dark" href="https://github.com/ActiveVisionLab/ray-onet/" role="button">Code</a> -->
 		<button type="button" class="btn btn-dark" disabled>Code</button>
-		<a class="btn btn-dark", href="" role="button">Dataset</a>
+		<a class="btn btn-dark", href="https://drive.google.com/drive/folders/1gqmonTlR8LbJkljtT28S47N_o_YoExFz?usp=share_link" role="button">Dataset</a>
 	</div>
 	<div class="polaroid" style="padding-bottom: 40px">
 		<div style="padding: 0px 0px;", class="center">
 			<div class="b-dics" >
-				<img id="img3" src="my_imgs/v10_3m_360.png" alt="Mip-NeRF 360">
-				<img id="img2" src="my_imgs/v10_3m_m360.png" alt="MS-Mip-NeRF 360">
-				<img id="img1" src="my_imgs/v10_3m_mip.png" alt="Mip-NeRF">
-				<img id="img4" src="my_imgs/v10_3m_mmip.png" alt="MS-Mip-NeRF">
+				<img id="img3" src="my_imgs/3m_mip.png" alt="Mip-NeRF">
+				<img id="img2" src="my_imgs/3m_mmip.png" alt="MS-Mip-NeRF_B">
+				<img id="img1" src="my_imgs/3m_360.png" alt="Mip-NeRF 360">
+				<img id="img4" src="my_imgs/3m_m360.png" alt="MS-Mip-NeRF 360">
 			</div>		
 		</div>
 
@@ -260,9 +267,9 @@
 <h2 class="title is-4">BibTeX</h2>
 <code class="codebox" id="bibtex"><pre>
 	@inproceedings{yin2023msnerf,
-		author    = {Ze-Xin Yin and Jia-Xiong Qiu and Ming-Ming Cheng and Bo Ren},
+		author    = {Ze-Xin Yin and Jiaxiong Qiu and Ming-Ming Cheng and Bo Ren},
 		title     = {Multi-Space Neural Radiance Fields},
-		journal   = {CVPR},
+		journal   = {The IEEE/CVF Computer Vision and Pattern Recognition Conference(CVPR)},
 		year      = {2023}
 	  }
    
