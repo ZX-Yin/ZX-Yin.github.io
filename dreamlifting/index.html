@@ -125,7 +125,23 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Although native 3D generation has progressed rapidly, end-to-end synthesis of relightable 3D assets still lags behind, chiefly because of the substantial representational gap between geometry and texture. Current methods either depend on 2D diffusion models to produce texture maps or collapse them into a single RGB atlas, both of which limit downstream applicability. To leverage the rich texture priors and implicit geometric cues in multiview (MV) diffusion models, we propose the novel Lightweight Gaussian Asset Adapter module (LGAA), a feed-forward module that elevates pre-trained MV diffusion models to full 3D asset generators. LGAA clones and freezes the original layers, injects zero-initialized convolutional layers to adapt the priors, and appends a Gaussian-asset head that directly outputs PBR-ready 3D assets. This modular design preserves and fuses multiview knowledge within a unified framework, and its performance scales with the capacity of the underlying base model. Because geometry and materials are produced simultaneously, supervision can rely solely on rendered images, eliminating the need for large-scale native 3D datasets; in practice we train LGAA with only 69 K multiview rendered images. We further introduce deferred-shading supervision that aligns G-buffer channels with RGB outputs, ensuring photorealistic rendering and higher-quality PBR materials. Based on our LGAA,we further propose a dedicated post-processing stage that converts the predicted Gaussian assets into high-quality, relightable mesh assets. Extensive quantitative and qualitative results demonstrate that LGAA is compatible with both text- and image-conditioned MV diffusion models and consistently benefits from stronger backbones.
+                            Although native 3D generation approaches show promising potential for 3D shape creation, they lack the ability to synthesize
+                            high-quality physically based rendering (PBR) materials simultaneously, limiting the usability of the resulting 3D assets. 
+                            We observe that current multiview (MV) diffusion models are capable of generating 3D consistent appearance and PBR materials, 
+                            indicating that MV diffusion models possess rich geometric and PBR material priors. In this paper, we present 
+                            Lightweight Gaussian Asset Adapter (LGAA), a novel framework that adaptively fuses the rich priors in MV diffusion models 
+                            into an unified system for the simultaneous generation of geometry and PBR materials in the form of 2D Gaussian Splatting. 
+                            Specifically, the LGAA features a modular design, which adaptively fuses pre-trained priors with the LGAA Wrapper, 
+                            aligns geometry and PBR material priors via the LGAA Switcher, and produces pixel-aligned Gaussian splat assets with the LGAA Decoder. 
+                            To further enhance asset usability, a dedicated post-processing procedure is introduced to effectively extract high-quality, 
+                            relightable mesh assets for downstream applications. The modular design ensures compatibility with different base models 
+                            and performance scaling with stronger underlying base models, indicating the potential of our scheme. 
+                            Besides, our scheme leverages knowledge from pre-trained models instead of training from scratch, leading to efficient convergence 
+                            trained on merely 69k instances. Also, generating geometry with PBR materials eliminates the need for native 3D datasets, 
+                            as the supervision can be performed solely on rendered images; accordingly, we introduce image-based deferred shading supervision 
+                            that aligns G-buffer channels with RGB outputs, ensuring photorealistic rendering and high-quality PBR materials. 
+                            Extensive quantitative and qualitative experiments demonstrate the superior performance of LGAA with both text- and 
+                            image-conditioned MV diffusion models.
                         </p>
                     </div>
                 </div>
