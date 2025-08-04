@@ -64,38 +64,37 @@
                         <!-- Authors -->
                         <div class="is-size-5 publication-authors">
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?hl=zh-CN&pli=1&user=I1BKs78AAAAJ">Ze-Xin Yin</a><sup>1, 4, 5</sup>,
+                            <a href="https://scholar.google.com/citations?hl=zh-CN&pli=1&user=I1BKs78AAAAJ">Ze-Xin Yin</a><sup>1</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=hQjoD7kAAAAJ&hl=zh-CN">Jiaxiong Qiu</a><sup>4</sup>,
+                            <a href="https://scholar.google.com/citations?user=hQjoD7kAAAAJ&hl=zh-CN">Jiaxiong Qiu</a><sup>3</sup>,
                         </span>
                         <span class="author-block">
-                            Liu Liu<sup>4</sup>,
+                            Liu Liu<sup>3</sup>,
                         </span>
                         <span class="author-block">
-                            Xinjie Wang<sup>4</sup>,
+                            Xinjie Wang<sup>3</sup>,
                         </span>
                         <span class="author-block">
-                            Wei Sui<sup>5</sup>,
+                            Wei Sui<sup>4</sup>,
                         </span>
                         <span class="author-block">
-                            Zhizhong Su<sup>4</sup>,
+                            Zhizhong Su<sup>3</sup>,
                         </span>
                         <span class="author-block">
                             <a href="https://scholar.google.com/citations?user=hQjoD7kAAAAJ&hl=zh-CN">Jian Yang</a><sup>1</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=hQjoD7kAAAAJ&hl=zh-CN">Jin Xie</a><sup>2, 3†</sup>
+                            <a href="https://scholar.google.com/citations?user=hQjoD7kAAAAJ&hl=zh-CN">Jin Xie</a><sup>2†</sup>
                         </span>
                         </div>
 
                         <!-- Affiliations -->
                         <div class="is-size-5 publication-authors">
                         <span class="author-block"><sup>1</sup>CA Lab, VCIP, College of Computer Science, Nankai University</span> &nbsp;
-                        <span class="author-block"><sup>2</sup>State Key Laboratory for Novel Software Technology, Nanjing University, Nanjing, China</span> &nbsp;
-                        <span class="author-block"><sup>3</sup>School of Intelligence Science and Technology, Nanjing University, Suzhou, China</span> &nbsp;
-                        <span class="author-block"><sup>4</sup>Horizon Robotics</span> &nbsp;
-                        <span class="author-block"><sup>5</sup>D-Robotics</span>
+                        <span class="author-block"><sup>2</sup>School of Intelligence Science and Technology, Nanjing University, Suzhou, China</span> &nbsp;
+                        <span class="author-block"><sup>3</sup>Horizon Robotics</span> &nbsp;
+                        <span class="author-block"><sup>4</sup>D-Robotics</span>
                         </div>
 
                         <!-- Author Notes -->
@@ -125,10 +124,11 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            The labor- and experience-intensive creation of 3D assets with physically based rendering (PBR) materials demands for an
-                            autonomous 3D asset creation pipeline. However, most existing 3D generation methods focus on geometry modeling and bake textures
-                            into simple vertex colors. In this paper, we present Lightweight Gaussian Asset Adapter (LGAA), a novel framework dedicated to PBR-
-                            ready 3D asset generation by exploiting the multi-view (MV) diffusion priors from a novel perspective. The LGAA features a modular
+                            The labor- and experience-intensive creation of 3D assets with physically based rendering (PBR) materials demands an
+                            autonomous 3D asset creation pipeline. However, most existing 3D generation methods focus on geometry modeling, either baking
+                            textures into simple vertex colors or leaving texture synthesis to post-processing with image diffusion models. To achieve end-to-end
+                            PBR-ready 3D asset generation, we present Lightweight Gaussian Asset Adapter (LGAA), a novel framework that unifies the modeling of
+                            geometry and PBR materials by exploiting multi-view (MV) diffusion priors from a novel perspective The LGAA features a modular
                             design with three components. Specifically, the LGAA Wrapper reuses and adapts network layers from MV diffusion models, which
                             encapsulate knowledge acquired from billions of images, enabling better convergence in a data-efficient manner. To incorporate multiple
                             diffusion priors for geometry and PBR synthesis, the LGAA Switcher aligns multiple LGAA Wrapper layers encapsulating different
