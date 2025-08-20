@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <meta charset="utf-8">
     <meta name="description" content="DreamLifting: A Plug-in Module Lifting MV Diffusion Models for 3D Asset Generation">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,7 +93,7 @@
                         <!-- Affiliations -->
                         <div class="is-size-5 publication-authors">
                         <span class="author-block"><sup>1</sup>PCA Lab, VCIP, College of Computer Science, Nankai University</span> &nbsp;
-                        <span class="author-block"><sup>2</sup>School of Intelligence Science and Technology, Nanjing University, Suzhou, China</span> &nbsp;
+                        <span class="author-block"><sup>2</sup>School of Intelligence Science and Technology, Nanjing University, Suzhou, China</span> &nbsp;<br>
                         <span class="author-block"><sup>3</sup>Horizon Robotics</span> &nbsp;
                         <span class="author-block"><sup>4</sup>D-Robotics</span>
                         </div>
@@ -111,7 +112,14 @@
             <div class="hero-body">
                 <img src="./static/teaser/teaser.jpg" height="100%" />
                 <h2 class=" subtitle has-text-centered" style="padding-top: 0px;">
-                    The proposed pipeline lifts pre-trained text-/image-to-multiview diffusion models for direct PBR-ready 3D asset generation on on consumer-grade GPUs.
+                    <div class="content has-text-justified">
+                        <p>
+                            Our pipeline possesses the capability of generating diverse, PBR-ready 3D assets from either text prompts or image
+                            conditions. The synthesized assets are fully relightable with accurate PBR materials; for example, the wooden owl instance
+                            exhibits diffuse color changes under different environment maps, while the specular dog instance successfully reflects its
+                            surroundings. These results highlight the usability of the generated 3D assets.
+                        </p>
+                    </div>
                 </h2>
             </div>
         </div>
@@ -151,7 +159,7 @@
                     <h2 class="title is-4">Relightability of Assets</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Our pipeline generates 3D assets with PBR materials. Here, we show a few cases.
+                            Our pipeline generates 3D assets with PBR materials. Here, we show a few cases. It may take a while to load the 3D asset, please be patient.
                         </p>
                     </div>
                     <div class="columns is-centered">
@@ -204,11 +212,22 @@
                     <h2 class="title is-4">Method Overview</h2>
                     <img src="./static/teaser/overview.jpg" />
                     <div class="content has-text-justified" style="padding-top: 15px">
+                        <script type="text/javascript">
+                            MathJax.Hub.Config({
+                            tex2jax: {
+                                inlineMath: [['',''], ['\\(','\\)']]
+                            }
+                            });
+                        </script>
                         Overall of the 3D asset generation pipeline. We propose the Lightweight Gaussian Asset Adapter (LGAA), which
-                        is composed by three components: (a) LGAA Wrapper (LGAA-W), (b) LGAA Switcher (LGAA-S), and (c) LGAA Decoder
-                        (LGAA-D). Our LGAA takes feature maps from pre-trained MV diffusion model, adapts priors with the proposed modules,
-                        and produces Gaussian Splat assets with PBR materials. During training procedure, we tie the G-buffer maps with the RGB
-                        images via image-based deferred shading. Then we extracts 3D mesh with PBR material maps from the Gaussian Splat
+                        is composed of three components: (a) LGAA Wrapper (LGAA-W), (b) LGAA Switcher (LGAA-S), and (c) LGAA Decoder
+                        (LGAA-D), where \(\mathcal{ZC}\) indicates zero-initialized convolutional layers. In (a), \(\mathbf{X}\) indicates input feature maps, 
+                        \(\mathbf{Y}\) are feature maps from MV diffusion models, and \(\mathbf{Y}'\) are output maps from the LGAA-W. In (b), \(\mathbf{Y}_a\) 
+                        and \(\mathbf{Y}_g\) are feature maps in the appearance and geometry branches, while \(\mathbf{Y}'_a\) and \(\mathbf{Y}'_g\) are 
+                        output feature maps after information alignment. 
+                        Our LGAA takes feature maps from a pre-trained MV diffusion model, adapts priors with the proposed modules, and produces
+                        Gaussian Splat assets with PBR materials. During the training procedure, we tie the G-buffer maps with the RGB images
+                        via image-based deferred shading. In inference, we extract the 3D mesh with PBR material maps from the Gaussian Splat
                         assets with carefully designed post-processing.
                     </div>
                 </div>
@@ -313,6 +332,22 @@
           <div class="hero-body">
             <video id="teaser" autoplay muted loop playsinline height="100%">
               <source src="./videos/t23d_with_cap.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3"><center>Complete supplementary video</center></h2>
+          <div class="content has-text-justified">
+            <p>
+                In the supplementary video, we provide more comparisons and detailed relighting results.
+            </p>
+          <div class="hero-body">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source src="./videos/Supp_video.mp4"
                       type="video/mp4">
             </video>
           </div>
