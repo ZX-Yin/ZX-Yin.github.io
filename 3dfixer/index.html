@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="3D-Fixer is a novel paradigm for compositional 3D scene generation from a single image through an in-place completion scheme." />
+    <meta
+      name="keywords"
+      content="3D-Fixer, Image to 3D Generation, 3D Scene Generation" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      3D-Fixer: Coarse-to-Fine In-place Completion for 3D Scenes from a Single Image
+    </title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <!-- <link rel="icon" href="./static/images/favicon.svg" /> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!--  Scene Viewer -->
+    <link rel="stylesheet" href="modules/SceneViewer/scene-viewer.css" />
+
+    <!-- Video Viewer -->
+    <link rel="stylesheet" href="modules/VideoViewer/video-viewer.css" />
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center">
+          <a class="navbar-item" href="https://github.com/huanngzh">
+            <span class="icon">
+              <i class="fas fa-home"></i>
+            </span>
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Related Researches </a>
+            <div class="navbar-dropdown">
+              <a
+                class="navbar-item"
+                href="https://huanngzh.github.io/MIDI-Page/"
+                target="_blank">
+                MIDI
+              </a>
+              <a
+                class="navbar-item"
+                href="https://andreeadogaru.github.io/Gen3DSR/"
+                target="_blank">
+                Gen3DSR
+              </a>
+              <a
+                class="navbar-item"
+                href="https://mengmouxu.github.io/SceneGen/"
+                target="_blank">
+                SceneGen
+              </a>
+              <a
+                class="navbar-item"
+                href="https://sam3d.org/"
+                target="_blank">
+                SAM 3D
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                3D-Fixer: Coarse-to-Fine In-place Completion for 3D Scenes from a Single Image
+              </h1>
+              <h2 class="title is-3 publication-title" style="color: #008bf5">
+                CVPR 2026
+              </h2>
+              <div class="is-size-5 publication-authors">
+                <a
+                  href="https://scholar.google.com/citations?user=I1BKs78AAAAJ"
+                  target="_blank"
+                  >Ze-Xin Yin</a
+                ><sup>1</sup>,
+                <a
+                  href="https://liuliu3dv.github.io/"
+                  target="_blank"
+                  >Liu Liu</a
+                ><sup>3†</sup>,
+                <a
+                  href="https://openreview.net/profile?id=%7EXinjie_Wang6"
+                  target="_blank"
+                  >Xinjie Wang</a
+                ><sup>3</sup>,
+                <a
+                  href="https://scholar.google.com/citations?user=0vckuD8AAAAJ"
+                  target="_blank"
+                  >Wei Sui</a
+                ><sup>4</sup>,
+                <a
+                  href="https://scholar.google.com/citations?user=HQfc8TEAAAAJ"
+                  target="_blank"
+                  >Zhizhong Su</a
+                ><sup>3</sup>,
+                <a
+                  href="https://scholar.google.com/citations?user=6CIDtZQAAAAJ"
+                  target="_blank"
+                  >Jian Yang</a
+                ><sup>1</sup>,
+                <a href="https://csjinxie.github.io/" target="_blank"
+                  >Jin Xie</a
+                ><sup>2✉</sup>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <sup>1</sup>Nankai University &nbsp;&nbsp; <sup>2</sup>Nanjing University
+                &nbsp;&nbsp; <sup>3</sup>Horizon Robotics &nbsp;&nbsp;
+                <sup>4</sup>D-Robotics <br />
+                <sup>†</sup>Project Leader &nbsp;&nbsp; <sup>✉</sup>Corresponding
+                Author
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <span class="link-block">
+                    <a
+                      href=""
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <!-- Video Link. -->
+                  <!-- <span class="link-block">
+                    <a href=""
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Video</span>
+                    </a>
+                  </span> -->
+                  <!-- Code Link. -->
+                  <span class="link-block">
+                    <a
+                      href=""
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <!-- Model Link. -->
+                  <span class="link-block">
+                    <a
+                      href=""
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fa fa-database"></i>
+                      </span>
+                      <span>Model</span>
+                    </a>
+                  </span>
+                  <!-- Demo Link. -->
+                  <span class="link-block">
+                    <a
+                      href=""
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="far fa-smile"></i>
+                      </span>
+                      <span>Demo</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <hr
+                  style="
+                    width: 100%;
+                    height: 0.7px;
+                    background-color: rgba(0, 0, 0, 0.665);
+                    margin-top: 1em;
+                  " />
+                Create high-fidelity 3D Scene from a single image using the <strong>In-Place Completion</strong> diagram from
+                <strong>3D-Fixer</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <img src="./assets/teaser.png" alt="teaser" style="width: 100%" />
+            <!-- <video
+              id="dollyzoom"
+              autoplay
+              controls
+              muted
+              loop
+              playsinline
+              width="100%">
+              <source src="./assets/teaser.mp4" type="video/mp4" />
+            </video> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Compositional 3D scene generation from a single view
+                requires simultaneous recovery of the layout and 3D as-
+                sets, which are currently achieved by feed-forward gener-
+                ation methods and per-instance generation methods domi-
+                nantly. The former methods directly predict 3D assets with
+                explicit 6DoF poses via efficient network inference, but they
+                lack generalization ability to complex scenes, whereas the
+                latter methods gain generalization via divide-and-conquer
+                strategy, but they suffer from time-consuming pose opti-
+                mization. To bridge the gap, we introduce 3D-Fixer via
+                a novel in-place completion paradigm. Specifically, 3D-
+                Fixer extends 3D object generative priors to generate com-
+                plete 3D assets conditioning on the partially visible point
+                cloud at the same location, which is cropped from the frag-
+                mented geometry obtained from the geometry estimation
+                methods. Unlike prior works that require explicit pose
+                alignment, 3D-Fixer explicitly utilizes the fragmented ge-
+                ometry as the spatial anchor to preserve layout fidelity. At
+                its core, we propose a coarse-to-fine generation scheme to 
+                resolve boundary ambiguity under occlusion, supported
+                by a dual-branch conditioning network and an Occlusion-
+                Robust Feature Alignment (ORFA) strategy for stable train-
+                ing. Furthermore, to dismantle the data scarcity bottleneck,
+                we present ARSG-110K, the largest scene-level dataset to
+                date, comprising over 110K diverse scenes and 3M anno-
+                tated images with high-fidelity 3D ground truth. Extensive
+                experiments demonstrate that 3D-Fixer achieves state-of-
+                the-art geometric accuracy, which significantly outperforms
+                baselines like MIDI and Gen3DSR, while maintaining the
+                efficiency of diffusion process
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--/ Abstract. -->
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <div class="has-text-centered">
+              <h2 class="title is-3">How it works</h2>
+            </div>
+            <br />
+            <div class="has-text-justified">
+              Given an input image of a scene, we segment it into multiple parts
+              and use a multi-instance diffusion model conditioned on those
+              images to generate compositional 3D instances of the scene. These
+              3D instances can be directly composed into a scene. The total
+              processing time runs in as little as 40 seconds.
+            </div>
+            <video autoplay muted loop playsinline height="80%">
+              <source src="./assets/how_it_works.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripts Start -->
+    <script type="module">
+      import { ViewerModule } from "./modules/SceneViewer/scene-viewer.js";
+
+      const viewer = new ViewerModule(
+        ".scene-viewer",
+        [
+          "example_0001",
+          "example_0002",
+          "example_0003",
+          "example_0004",
+          "example_0005",
+        ],
+        "assets/3d_scenes",
+        "assets/images"
+      );
+      viewer.init();
+    </script>
+    <!-- Scripts End -->
+
+    <section class="section" style="padding-top: 0">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <div class="has-text-centered">
+              <h2 class="title is-3">Interactive Results</h2>
+            </div>
+            <br />
+            <div class="scene-viewer">
+              <!-- Scene Viewer -->
+              <div id="loading-overlay">
+                <div class="loading-spinner"></div>
+              </div>
+              <div id="viewer-container"></div>
+              <div id="button-block"></div>
+              <div class="swiper">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-wrapper" id="image-slider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="module">
+      import { VideoViewerModule } from "./modules/VideoViewer/video-viewer.js";
+
+      const videoViewer = new VideoViewerModule(
+        ".video-viewer",
+        [
+          "comp_scene1",
+          "comp_scene4",
+          "comp_scene2",
+          "comp_scene3",
+          "comp_scene5",
+        ],
+        "assets/videos",
+        "assets/images"
+      );
+      videoViewer.init();
+    </script>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <div class="has-text-centered">
+              <h2 class="title is-3">Comparisons to Other Methods</h2>
+            </div>
+            <br />
+            <div class="video-viewer">
+              <div id="video-container"></div>
+              <div class="swiper">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-wrapper" id="image-slider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="has-text-centered">
+          <h2 class="title is-3">Method Overview</h2>
+        </div>
+        <br />
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <br />
+            <img src="./assets/overview.png" class="" alt="" />
+            Architecture of the 3D-Fixer pipeline and dataset. (Top) Scene Decomposition extracts instance-level partial geometry from
+            the input. (Bottom-left) Progressive Completion generates the full asset via three stages: 1) The Coarse Structure Completer hallucinates
+            topology within a loose bound; 2) The Fine Shape Refiner sharpens geometry within a fine boundary; and 3) The Occlusion-Aware
+            3D Texturer applies observation-aligned textures. (Bottom-right) Our ARSG-110K Dataset provides high-quality assets and rich scene
+            compositions for training.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="has-text-centered">
+          <h2 class="title">BibTeX</h2>
+        </div>
+        <div
+          class="columns is-centered has-text-centered"
+          style="padding-bottom: 1.5rem">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <pre><code>@inproceedings{yin20263dfixer,
+  title={3D-Fixer: Coarse-to-Fine In-place Completion for 3D Scenes from a Single Image},
+  author={Yin, Ze-Xin and Liu, Liu and Wang, Xinjie and Sui, Wei and Su, Zhizhong and Yang, Jian and Xie, jin},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  year={2026}
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <a class="icon-link" href="">
+            <i class="fas fa-file-pdf"></i>
+          </a>
+          <a
+            class="icon-link"
+            href="https://github.com/ZX-Yin"
+            class="external-link"
+            disabled>
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p style="text-align: center">
+                The website template is borrowed from
+                <a href="https://github.com/huanngzh/MIDI-Page" target="_blank">MIDI</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
