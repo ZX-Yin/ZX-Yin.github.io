@@ -262,35 +262,27 @@
             <div class="content has-text-justified">
               <p>
                 Compositional 3D scene generation from a single view
-                requires simultaneous recovery of the layout and 3D as-
-                sets, which are currently achieved by feed-forward gener-
-                ation methods and per-instance generation methods domi-
-                nantly. The former methods directly predict 3D assets with
-                explicit 6DoF poses via efficient network inference, but they
-                lack generalization ability to complex scenes, whereas the
-                latter methods gain generalization via divide-and-conquer
-                strategy, but they suffer from time-consuming pose opti-
-                mization. To bridge the gap, we introduce 3D-Fixer via
-                a novel in-place completion paradigm. Specifically, 3D-
-                Fixer extends 3D object generative priors to generate com-
-                plete 3D assets conditioning on the partially visible point
-                cloud at the same location, which is cropped from the frag-
-                mented geometry obtained from the geometry estimation
-                methods. Unlike prior works that require explicit pose
-                alignment, 3D-Fixer explicitly utilizes the fragmented ge-
-                ometry as the spatial anchor to preserve layout fidelity. At
-                its core, we propose a coarse-to-fine generation scheme to 
+                requires simultaneous recovery of the layout and 3D assets,
+                which are currently achieved by feed-forward generation methods
+                and per-instance generation methods dominantly. The former methods
+                directly predict 3D assets with explicit 6DoF poses via efficient
+                network inference, but they lack generalization ability to complex
+                scenes, whereas the latter methods gain generalization via divide-and-conquer
+                strategy, but they suffer from time-consuming pose optimization.
+                To bridge the gap, we introduce 3D-Fixer via a novel in-place completion paradigm.
+                Specifically, 3D-Fixer extends 3D object generative priors to generate complete 3D assets
+                conditioning on the partially visible point
+                cloud at the same location, which is cropped from the fragented geometry obtained
+                from the geometry estimation methods. Unlike prior works that require explicit pose
+                alignment, 3D-Fixer explicitly utilizes the fragmented geometry as the spatial
+                anchor to preserve layout fidelity. At its core, we propose a coarse-to-fine generation scheme to
                 resolve boundary ambiguity under occlusion, supported
-                by a dual-branch conditioning network and an Occlusion-
-                Robust Feature Alignment (ORFA) strategy for stable train-
-                ing. Furthermore, to dismantle the data scarcity bottleneck,
+                by a dual-branch conditioning network and an Occlusion-Robust Feature Alignment (ORFA) 
+                strategy for stable training. Furthermore, to dismantle the data scarcity bottleneck,
                 we present ARSG-110K, the largest scene-level dataset to
-                date, comprising over 110K diverse scenes and 3M anno-
-                tated images with high-fidelity 3D ground truth. Extensive
-                experiments demonstrate that 3D-Fixer achieves state-of-
-                the-art geometric accuracy, which significantly outperforms
-                baselines like MIDI and Gen3DSR, while maintaining the
-                efficiency of diffusion process
+                date, comprising over 110K diverse scenes and 3M annotated images with high-fidelity 3D ground truth. Extensive
+                experiments demonstrate that 3D-Fixer achieves state-of-the-art geometric accuracy, which significantly outperforms
+                baselines like MIDI and Gen3DSR, while maintaining the efficiency of diffusion process.
               </p>
             </div>
           </div>
@@ -312,7 +304,7 @@
               and use a multi-instance diffusion model conditioned on those
               images to generate compositional 3D instances of the scene. These
               3D instances can be directly composed into a scene. The total
-              processing time runs in as little as 40 seconds.
+              network inference time runs in as little as 30 seconds.
             </div>
             <video autoplay muted loop playsinline height="80%">
               <source src="./assets/how_it_works.mp4" type="video/mp4" />
